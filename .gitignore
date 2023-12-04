@@ -1,5 +1,36 @@
-.editorconfig
-.idea
-**/target/*
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 .DS_Store
+
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# My configurations:
+db.ini
+deploy_key_rsa
+
+#java
+*.class
+*.classpath
+*.project
+*.settings
+.classpath
+.project
+**/target/*
+*classpath
+.gitignore
+*.gitignore
+bin
+logs
+.editorconfig
+
+#idea
+.idea
 *.iml

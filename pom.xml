@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lyft.data</groupId>
-    <artifactId>prestogateway-parent</artifactId>
-    <name>prestogateway-parent</name>
+    <artifactId>presto-gateway</artifactId>
+    <name>presto-gateway</name>
     <packaging>pom</packaging>
     <version>1.9.5</version>
 

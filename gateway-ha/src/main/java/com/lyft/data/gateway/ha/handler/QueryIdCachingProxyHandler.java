@@ -34,6 +34,8 @@ public class QueryIdCachingProxyHandler extends ProxyHandler {
   public static final String V1_STATEMENT_PATH = "/v1/statement";
   public static final String V1_QUERY_PATH = "/v1/query";
   public static final String V1_INFO_PATH = "/v1/info";
+  public static final String V1_CLUSTER_PATH = "/v1/cluster";
+  public static final String V1_QUEUED_LIST_PATH = "/v1/query?state=QUEUED";
   public static final String UI_API_STATS_PATH = "/ui/api/stats";
   public static final String UI_API_QUEUED_LIST_PATH = "/ui/api/query?state=QUEUED";
   public static final String PRESTO_UI_PATH = "/ui";
@@ -96,6 +98,8 @@ public class QueryIdCachingProxyHandler extends ProxyHandler {
   private boolean isPathWhiteListed(String path) {
     return path.startsWith(V1_STATEMENT_PATH)
         || path.startsWith(V1_QUERY_PATH)
+        || path.startsWith(V1_CLUSTER_PATH)
+        || path.startsWith(V1_QUEUED_LIST_PATH)
         || path.startsWith(PRESTO_UI_PATH)
         || path.startsWith(OAUTH2_PATH)
         || path.startsWith(V1_INFO_PATH)

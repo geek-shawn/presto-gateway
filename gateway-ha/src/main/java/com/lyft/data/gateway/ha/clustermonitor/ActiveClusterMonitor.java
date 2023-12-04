@@ -2,6 +2,8 @@ package com.lyft.data.gateway.ha.clustermonitor;
 
 import static com.lyft.data.gateway.ha.handler.QueryIdCachingProxyHandler.UI_API_QUEUED_LIST_PATH;
 import static com.lyft.data.gateway.ha.handler.QueryIdCachingProxyHandler.UI_API_STATS_PATH;
+import static com.lyft.data.gateway.ha.handler.QueryIdCachingProxyHandler.V1_CLUSTER_PATH;
+import static com.lyft.data.gateway.ha.handler.QueryIdCachingProxyHandler.V1_QUEUED_LIST_PATH;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,7 +50,7 @@ public class ActiveClusterMonitor implements Managed {
   private ExecutorService singleTaskExecutor = Executors.newSingleThreadExecutor();
 
   @Inject
-  public ActiveClusterMonitor(
+  public  ActiveClusterMonitor(
       List<PrestoClusterStatsObserver> clusterStatsObservers,
       GatewayBackendManager gatewayBackendManager,
       MonitorConfiguration monitorConfiguration) {
@@ -114,8 +116,8 @@ public class ActiveClusterMonitor implements Managed {
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader((InputStream) conn.getContent()));
         StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
+        String line = reader.readLine();
+        if (line != null) {
           sb.append(line + "\n");
         }
 
@@ -138,7 +140,7 @@ public class ActiveClusterMonitor implements Managed {
     clusterStats.setClusterId(backend.getName());
 
     // Fetch Cluster level Stats.
-    String target = backend.getProxyTo() + UI_API_STATS_PATH;
+    String target = backend.getProxyTo() + V1_CLUSTER_PATH;
     String response = queryCluster(target);
     if (Strings.isNullOrEmpty(response)) {
       log.error("Received null/empty response for {}", target);
@@ -163,7 +165,7 @@ public class ActiveClusterMonitor implements Managed {
 
     // Fetch User Level Stats.
     Map<String, Integer> clusterUserStats = new HashMap<>();
-    target = backend.getProxyTo() + UI_API_QUEUED_LIST_PATH;
+    target = backend.getProxyTo() + V1_QUEUED_LIST_PATH;
     response = queryCluster(target);
     if (Strings.isNullOrEmpty(response)) {
       log.error("Received null/empty response for {}", target);

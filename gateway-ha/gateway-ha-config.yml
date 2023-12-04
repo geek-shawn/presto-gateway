@@ -10,7 +10,7 @@ requestRouter:
 dataStore:
   jdbcUrl: jdbc:mysql://127.0.0.1:3306/prestogateway
   user: root
-  password: root123
+  password: root123456
   driver: com.mysql.cj.jdbc.Driver
 
 server:
@@ -22,11 +22,14 @@ server:
       port: 8091
 
 notifier:
-  smtpHost: localhost
-  smtpPort: 587
-  sender: presto-gw-monitor-noreply@lyft.com
+  smtpAuthEnabled: true
+  smtpHost: smtp.jiayinfintech.cn
+  smtpPort: 25
+  sender: bigdata@jiayinfintech.cn
+  smtpUser: bigdata@jiayinfintech.cn
+  smtpPassword: Jiayin@88
   recipients:
-    - prestodev@yourorg.com
+    - yangguang@jiayinfintech.cn
 
 # This can be adjusted based on the coordinator state
 monitor:
@@ -52,8 +55,8 @@ logging:
   appenders:
     - type: console
     - type: file
-      currentLogFilename: /var/log/prestoproxy/prestoproxy-java.log
-      archivedLogFilenamePattern: /var/log/prestoproxy/prestoproxy-java-%d{yyyy-MM-dd}-%i.log.gz
+      currentLogFilename: /Users/yangguang/workspaces/github/presto-gateway/logs/prestoproxy-java.log
+      archivedLogFilenamePattern: /Users/yangguang/workspaces/github/presto-gateway/logs/prestoproxy-java-%d{yyyy-MM-dd}-%i.log.gz
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 100MB
